@@ -6,10 +6,12 @@ import { Input, Button } from 'antd';
 import API, { graphqlOperation } from '@aws-amplify/api';
 
 
-export const InputField = () => {
-   
+export const InputField = ( { id } ) => {
+        console.log(id, 'h')
     const [inputValue, setInputValue] = useState('')
+    
 
+  
     const handleChange = (event) => {
         setInputValue(event.target.value)
     }
@@ -21,8 +23,9 @@ export const InputField = () => {
                 const input = {
                     author: author,
                     body: inputValue,
-                    channelID: '1'
+                    channelID: id
                 }
+
     
                 try{
                     await API.graphql(graphqlOperation(createMessage, {input}))

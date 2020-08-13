@@ -1,11 +1,15 @@
 import React from 'react'
 
 import { Messages } from '../messages/Messages'
-export const Channel = () => {
+import { InputField } from '../input/Input'
+export const Channel = ({ match }) => {
+    const { params } = match
+    let id = params.channelID
 
     return(
         <>
-        <Messages/>
+        <Messages id={id}/>
+        <InputField id={id}/>
         </>
     )
 

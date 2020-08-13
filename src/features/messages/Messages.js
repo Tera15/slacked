@@ -7,7 +7,8 @@ import { List, Avatar } from 'antd';
 import { onCreateMessage } from '../../graphql/subscriptions'
 import { messagesByChannelId } from '../../graphql/queries'
 
-export const Messages = ({channelID}) => {
+export const Messages = ({ id }) => {
+
   const messagesEnd = useRef()
   const [messages, setMessages] = useState([])
 
@@ -15,7 +16,7 @@ export const Messages = ({channelID}) => {
   
   useEffect(() =>{
     getMessages()
-  },[])
+  },[id])
 
   useEffect(() =>{
     const subscription = API
@@ -30,9 +31,9 @@ export const Messages = ({channelID}) => {
   },[messages])
 
   const getMessages = async () => {
-    console.log(channelID)
+    
    const resp = await API.graphql(graphqlOperation(messagesByChannelId, {
-     channelID: '1',
+     channelID: id,
      sortDirection: 'ASC'
    }))
    const items = resp?.data?.messagesByChannelID?.items;
