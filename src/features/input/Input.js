@@ -7,7 +7,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 
 
 export const InputField = ( { id } ) => {
-        console.log(id, 'h')
+        
     const [inputValue, setInputValue] = useState('')
     
 
@@ -41,9 +41,9 @@ export const InputField = ( { id } ) => {
 
 
 return (  
-    <>
+    <div>
     <Input value={inputValue} onChange={handleChange}/>
-    <Button onClick={sendMessage}>Send</Button>
-    </>
+    <Button style={{width:'100%'}} onClick={sendMessage}>Send</Button>
+    </div>
     )
 }
