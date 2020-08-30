@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef} from 'react';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import '@aws-amplify/pubsub';
 
-import { List, Avatar } from 'antd';
+import { List } from 'antd';
 
 import { onCreateMessage } from '../../graphql/subscriptions'
 import { messagesByChannelId } from '../../graphql/queries'
@@ -50,9 +50,9 @@ export const Messages = ({ id }) => {
     itemLayout="vertical"
     dataSource={messages}
     renderItem={item => (
-      <List.Item>
+      <List.Item style={{marginLeft: '2rem'}}>
         <List.Item.Meta
-          avatar={<Avatar src={item.avatar} />}
+          // avatar={<Avatar src={item.avatar} />}
           title={item.author}
           description={item.body}
         />

@@ -1,6 +1,6 @@
 {
     "identityPoolName": "slacked86521b3c_identitypool_86521b3c",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "slacke86521b3c",
     "userPoolName": "slacked86521b3c_userpool_86521b3c",
     "autoVerifiedAttributes": [

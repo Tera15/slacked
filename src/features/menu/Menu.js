@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import API, { graphqlOperation, Auth } from '@aws-amplify/api';
+import API, { graphqlOperation } from '@aws-amplify/api';
 import { AmplifySignOut } from '@aws-amplify/ui-react'
 import { Link } from 'react-router-dom'
 
 import { Button, Menu, Modal } from 'antd'
-import { UserOutlined, MinusOutlined  } from '@ant-design/icons';
+import {  MinusOutlined  } from '@ant-design/icons';
 
 import { ChannelForm } from './ChannelForm'
 
-import { getChannel, listChannels } from '../../graphql/queries'
+
+import { listChannels } from '../../graphql/queries'
 import { onCreateChannel, onDeleteChannel } from '../../graphql/subscriptions'
-import { Channel } from '../channel/Channel';
+
 
 
 
 export const SideMenu = () => {
     const [modal, setModal] = useState(false)
     const [channels, setChannels] = useState([])
+   
     
-    useEffect( () => {
-    fetchChannel()
+  useEffect( () => {
+  fetchChannel()
+    
   },[channels])
 
 
@@ -49,19 +52,17 @@ export const SideMenu = () => {
  
     const fetchChannel = async () =>{
       try{
-       
         const response = await API.graphql(graphqlOperation(listChannels))
         const channelList = response.data.listChannels.items
         setChannels(channelList)
-        console.log(channelList[0])
        }catch(error){
-         console.log({error})
+         alert('Oops something went wrong, please try again')
        }
     } 
 
 
-
-    const hideModal = () => setModal(false)
+  
+    const hideModal = (modalFN) => modalFN(false)
 
 
     return (
@@ -82,14 +83,14 @@ export const SideMenu = () => {
    <Modal
     visible={modal}
     title="Add Channel"
-    onCancel={hideModal}
+    onCancel={() => hideModal(setModal)}
     footer={[
-        <Button key="back" onClick={() => hideModal()}>
+        <Button key="back" onClick={() => hideModal(setModal)}>
           Cancel
         </Button>
       ]}
    >
-       <ChannelForm hideModal={() => hideModal()}/>
+       <ChannelForm hideModal={() => hideModal(setModal)}/>
    </Modal>
     <AmplifySignOut/>
    </div>
